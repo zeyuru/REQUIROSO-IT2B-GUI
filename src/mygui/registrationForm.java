@@ -1,5 +1,6 @@
 
 package mygui;
+import config.dbConnect;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -9,6 +10,8 @@ public class registrationForm extends javax.swing.JFrame {
     
     public registrationForm() {
         initComponents();
+        
+    
         
       setSize(950, 600);  
     setLocationRelativeTo(null); 
@@ -22,6 +25,8 @@ public class registrationForm extends javax.swing.JFrame {
             setLocationRelativeTo(null);
         }
     });
+    
+    
     }
   private ArrayList<String> registeredEmails = new ArrayList<>();
     private ArrayList<String> registeredUsernames = new ArrayList<>();
@@ -34,18 +39,18 @@ public class registrationForm extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        passportnumber = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        email = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jPasswordField3 = new javax.swing.JPasswordField();
-        jButton2 = new javax.swing.JButton();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        password = new javax.swing.JPasswordField();
+        createaccount = new javax.swing.JButton();
+        ln = new javax.swing.JTextField();
+        username = new javax.swing.JTextField();
+        fn = new javax.swing.JTextField();
+        phonenumber = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -59,10 +64,8 @@ public class registrationForm extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
+        UserType = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,33 +77,33 @@ public class registrationForm extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel2.setText("Phone Number");
-        mainpanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 380, -1, -1));
+        mainpanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 390, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel3.setText("Password");
-        mainpanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 320, -1, -1));
+        mainpanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 340, -1, -1));
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        passportnumber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                passportnumberActionPerformed(evt);
             }
         });
-        mainpanel.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 460, 330, 30));
+        mainpanel.add(passportnumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 460, 330, 30));
 
         jLabel4.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel4.setText("Email");
         mainpanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 200, -1, -1));
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                emailActionPerformed(evt);
             }
         });
-        mainpanel.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, 330, 30));
+        mainpanel.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, 330, 30));
 
         jLabel5.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel5.setText("Username");
-        mainpanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 260, -1, -1));
+        mainpanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 290, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel6.setText("First Name");
@@ -110,49 +113,49 @@ public class registrationForm extends javax.swing.JFrame {
         jLabel7.setText("Last Name");
         mainpanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 140, -1, -1));
 
-        jPasswordField3.addActionListener(new java.awt.event.ActionListener() {
+        password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField3ActionPerformed(evt);
+                passwordActionPerformed(evt);
             }
         });
-        mainpanel.add(jPasswordField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 340, 330, 30));
+        mainpanel.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 360, 330, 30));
 
-        jButton2.setFont(new java.awt.Font("Verdana", 1, 11)); // NOI18N
-        jButton2.setText("CREATE ACCOUNT");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        createaccount.setFont(new java.awt.Font("Verdana", 1, 11)); // NOI18N
+        createaccount.setText("CREATE ACCOUNT");
+        createaccount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                createaccountActionPerformed(evt);
             }
         });
-        mainpanel.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 500, 150, 30));
+        mainpanel.add(createaccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 500, 150, 30));
 
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        ln.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                lnActionPerformed(evt);
             }
         });
-        mainpanel.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 160, 180, 30));
+        mainpanel.add(ln, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 160, 180, 30));
 
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
+                usernameActionPerformed(evt);
             }
         });
-        mainpanel.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 280, 330, 30));
+        mainpanel.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 310, 330, 30));
 
-        jTextField10.addActionListener(new java.awt.event.ActionListener() {
+        fn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField10ActionPerformed(evt);
+                fnActionPerformed(evt);
             }
         });
-        mainpanel.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 160, 160, 30));
+        mainpanel.add(fn, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 160, 160, 30));
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        phonenumber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                phonenumberActionPerformed(evt);
             }
         });
-        mainpanel.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 400, 330, 30));
+        mainpanel.add(phonenumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 410, 330, 30));
 
         jLabel8.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel8.setText("Passport Number");
@@ -219,90 +222,160 @@ public class registrationForm extends javax.swing.JFrame {
 
         mainpanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 390, 580));
 
-        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagefolder/plane resized.png"))); // NOI18N
-        mainpanel.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 160, -1, -1));
-
-        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagefolder/airport-removebg-preview.png"))); // NOI18N
-        mainpanel.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 300, -1, -1));
-
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagefolder/clouds-removebg-preview.png"))); // NOI18N
-        mainpanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 580, 500));
-
         jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagefolder/purp.png"))); // NOI18N
         mainpanel.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, -40, -1, -1));
+
+        UserType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select User Type", "Admin", "Passenger" }));
+        UserType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UserTypeActionPerformed(evt);
+            }
+        });
+        mainpanel.add(UserType, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 260, 330, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(mainpanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1027, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(mainpanel, javax.swing.GroupLayout.PREFERRED_SIZE, 947, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(80, 80, 80))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainpanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 570, Short.MAX_VALUE)
+            .addComponent(mainpanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void passportnumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passportnumberActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_passportnumberActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-      String email = jTextField3.getText().trim();
+    private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
+     
+    }//GEN-LAST:event_emailActionPerformed
 
-  
-    if (!email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
-        JOptionPane.showMessageDialog(this, "Invalid email format!", "Error", JOptionPane.ERROR_MESSAGE);
-        jTextField3.setText(""); 
+    private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
+      
+   
+    
+    }//GEN-LAST:event_passwordActionPerformed
+
+    private void createaccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createaccountActionPerformed
+        dbConnect dbc = new dbConnect();
+
+    String firstName = fn.getText().trim();
+    String lastName = ln.getText().trim();
+    String emailText = email.getText().trim();
+    String userType = (String) UserType.getSelectedItem();
+    String usernameText = username.getText().trim();
+    String passwordText = password.getText().trim();
+    String phoneNumber = phonenumber.getText().trim();
+    String passportNumber = passportnumber.getText().trim();
+
+    if (firstName.isEmpty() || !firstName.matches("[a-zA-Z]+")) {
+        JOptionPane.showMessageDialog(null, "First Name is required and must contain only letters!");
+        return;
+    }
+    if (lastName.isEmpty() || !lastName.matches("[a-zA-Z]+")) {
+        JOptionPane.showMessageDialog(null, "Last Name is required and must contain only letters!");
         return;
     }
 
-   
-    if (registeredEmails.contains(email)) {
-        JOptionPane.showMessageDialog(this, "Email is already registered!", "Error", JOptionPane.ERROR_MESSAGE);
-        jTextField3.setText(""); 
+    // Email validation (Not empty, contains '@' and '.com', and not duplicate)
+    if (emailText.isEmpty() || !emailText.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.com$")) {
+        JOptionPane.showMessageDialog(null, "Enter a valid email (must contain '@' and end with '.com')!");
+        return;
     }
-    }//GEN-LAST:event_jTextField3ActionPerformed
-
-    private void jPasswordField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField3ActionPerformed
-        String password = new String(jPasswordField3.getPassword());
-
-    if (password.length() < 8) {
-        JOptionPane.showMessageDialog(this, "Password must be at least 8 characters long.", "Error", JOptionPane.ERROR_MESSAGE);
-        jPasswordField3.setText(""); 
+    if (dbc.checkDuplicate("passengers", "p_email", emailText)) {
+        JOptionPane.showMessageDialog(null, "Email is already registered!");
+        return;
     }
-    }//GEN-LAST:event_jPasswordField3ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    // User Type validation (Must be selected)
+    if (userType == null || userType.equals("Select User Type")) {
+        JOptionPane.showMessageDialog(null, "Please select a User Type!");
+        return;
+    }
+
+    // Username validation (Not empty & not duplicate)
+    if (usernameText.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Username is required!");
+        return;
+    }
+    if (dbc.checkDuplicate("passengers", "p_username", usernameText)) {
+        JOptionPane.showMessageDialog(null, "Username is already taken!");
+        return;
+    }
+
+    // Password validation (Not empty & at least 8 characters)
+    if (passwordText.isEmpty() || passwordText.length() < 8) {
+        JOptionPane.showMessageDialog(null, "Password must be at least 8 characters long!");
+        return;
+    }
+
+    // Phone number validation (Not empty & only digits)
+    if (phoneNumber.isEmpty() || !phoneNumber.matches("\\d+")) {
+        JOptionPane.showMessageDialog(null, "Phone Number is required and must contain only numbers!");
+        return;
+    }
+
+    // Passport Number validation (Not empty)
+    if (passportNumber.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Passport Number is required!");
+        return;
+    }
+
+    // Declare result before using it
+    int result = dbc.insertData("INSERT INTO passengers (p_fname, p_lname, p_email, p_usertype, p_username, p_password, p_pnumber, p_passport, status) " +
+            "VALUES ('" + firstName + "', '" + lastName + "', '" + emailText + "', '" + userType + "', " +
+            "'" + usernameText + "', '" + passwordText + "', '" + phoneNumber + "', '" + passportNumber + "', 'Pending')");
+
+    if (result == 1) {  // Check if the insertion was successful
+        JOptionPane.showMessageDialog(null, "Registered Successfully!");
+
+        // Close the registration form
+        this.dispose();
+
+        // Open the login form
+        new loginForm().setVisible(true);
+    } else {
+        JOptionPane.showMessageDialog(null, "Registration Failed!");
+    }
+    }//GEN-LAST:event_createaccountActionPerformed
+
+    private void lnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_lnActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
-
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
       
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    }//GEN-LAST:event_usernameActionPerformed
 
-    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
+    private void fnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField10ActionPerformed
+    }//GEN-LAST:event_fnActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
-         String phoneNumber = jTextField4.getText();
-
+    private void phonenumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phonenumberActionPerformed
+       
     
-    if (!phoneNumber.matches("\\d+")) {
-        JOptionPane.showMessageDialog(this, "Phone number must contain only numbers.", "Error", JOptionPane.ERROR_MESSAGE);
-        jTextField4.setText(""); 
-    }
-    }//GEN-LAST:event_jTextField4ActionPerformed
+
+    }//GEN-LAST:event_phonenumberActionPerformed
+
+    private void UserTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserTypeActionPerformed
+       
+    
+}
+
+// In your form's initialization (e.g., constructor or initComponents()):
+private void initializeComboBox() {
+    UserType.addItem("Admin");
+    UserType.addItem("Passenger");
+    }//GEN-LAST:event_UserTypeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -340,9 +413,11 @@ public class registrationForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> UserType;
+    private javax.swing.JButton createaccount;
+    private javax.swing.JTextField email;
+    private javax.swing.JTextField fn;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -353,8 +428,6 @@ public class registrationForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
@@ -365,13 +438,11 @@ public class registrationForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField3;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField ln;
     private javax.swing.JPanel mainpanel;
+    private javax.swing.JTextField passportnumber;
+    private javax.swing.JPasswordField password;
+    private javax.swing.JTextField phonenumber;
+    private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }
