@@ -8,10 +8,18 @@ public class PassengerDashboard extends javax.swing.JFrame {
     public PassengerDashboard() {
         initComponents();
           
-      setSize(950, 600);  
+     setSize(950, 600);  
     setLocationRelativeTo(null); 
  
+    setResizable(false); 
     
+  
+    this.addComponentListener(new java.awt.event.ComponentAdapter() {
+        @Override
+        public void componentMoved(java.awt.event.ComponentEvent evt) {
+            setLocationRelativeTo(null);
+        }
+    });
     
     }
 
@@ -33,10 +41,11 @@ public class PassengerDashboard extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Hello Passenger! Welcome to Matrix Airlines");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, -1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, -1, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 850, 150));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 1030, 120));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

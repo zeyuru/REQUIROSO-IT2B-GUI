@@ -16,16 +16,16 @@ public class loginForm extends javax.swing.JFrame {
     public loginForm() {
         initComponents();
         
-        jTextField2.setOpaque(false); // Makes inside transparent
-jTextField2.setBackground(new java.awt.Color(0, 0, 0, 0)); // Transparent inside
-jTextField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2)); // Black border
-jTextField2.setForeground(new java.awt.Color(0, 0, 0)); // **Black text**
-jTextField2.setFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 14)); // Optional stylish font
+        jTextField2.setOpaque(false); 
+jTextField2.setBackground(new java.awt.Color(0, 0, 0, 0)); 
+jTextField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2)); 
+jTextField2.setForeground(new java.awt.Color(0, 0, 0)); 
+jTextField2.setFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 14)); 
 
 jPasswordField1.setOpaque(false);
 jPasswordField1.setBackground(new java.awt.Color(0, 0, 0, 0));
-jPasswordField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2)); // Black border
-jPasswordField1.setForeground(new java.awt.Color(0, 0, 0)); // **Black text**
+jPasswordField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2)); 
+jPasswordField1.setForeground(new java.awt.Color(0, 0, 0)); 
 jPasswordField1.setFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 14));
 
     
@@ -43,28 +43,33 @@ jPasswordField1.setFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 14));
     
     }
      private String authenticateUser(String username, String password) {
-        dbConnect db = new dbConnect(); // Create dbConnect object
+        dbConnect db = new dbConnect(); 
         String userType = null;
         
-        String query = "SELECT p_usertype FROM passengers WHERE p_username = ? AND p_password = ?";
-        
-        try {
-            PreparedStatement pstmt = db.connect.prepareStatement(query);
-            pstmt.setString(1, username);
-            pstmt.setString(2, password);
-            ResultSet rs = pstmt.executeQuery();
+       String query = "SELECT p_usertype, status FROM passengers WHERE p_username = ? AND p_password = ?";
 
-            if (rs.next()) { 
-                userType = rs.getString("p_usertype"); // Get user type (Admin or Passenger)
+    try {
+        PreparedStatement pstmt = db.connect.prepareStatement(query);
+        pstmt.setString(1, username);
+        pstmt.setString(2, password);
+        ResultSet rs = pstmt.executeQuery();
+
+        if (rs.next()) { 
+            String status = rs.getString("status");
+            if (status.equalsIgnoreCase("Active")) { 
+                userType = rs.getString("p_usertype"); 
+            } else { 
+                userType = "Pending"; 
             }
-
-            rs.close();
-            pstmt.close();
-        } catch (SQLException e) {
-            System.out.println("Database Error: " + e.getMessage());
         }
 
-        return userType; // Return userType or null if not found
+        rs.close();
+        pstmt.close();
+    } catch (SQLException e) {
+        System.out.println("Database Error: " + e.getMessage());
+    }
+
+    return userType; 
     }
     
     @SuppressWarnings("unchecked")
@@ -197,24 +202,28 @@ jPasswordField1.setFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 14));
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
        
-        String username = jTextField2.getText(); // Get username
-        String password = new String(jPasswordField1.getPassword()); // Get password
+         String username = jTextField2.getText(); 
+    String password = new String(jPasswordField1.getPassword()); 
 
-        String userType = authenticateUser(username, password); // Call authentication method
+    String userType = authenticateUser(username, password); 
 
-        if (userType != null) { 
-            if (userType.equals("Admin")) {
-                JOptionPane.showMessageDialog(this, "Login Successful! Redirecting to Admin Dashboard.");
-                new AdminDashboard().setVisible(true); // Open Admin Dashboard
-                this.dispose(); // Close login form
-            } else if (userType.equals("Passenger")) {
-                JOptionPane.showMessageDialog(this, "Login Successful! Redirecting to Passenger Dashboard.");
-                new PassengerDashboard().setVisible(true); // Open Passenger Dashboard
-                this.dispose(); // Close login form
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Invalid username or password!", "Login Failed", JOptionPane.ERROR_MESSAGE);
+    if (userType == null) { 
+       
+        JOptionPane.showMessageDialog(this, "Invalid username or password!", "Login Failed", JOptionPane.ERROR_MESSAGE);
+    } else if (userType.equals("Pending")) { 
+       
+        JOptionPane.showMessageDialog(this, "Your account is not yet activated. Please wait for approval.");
+    } else { 
+        
+        if (userType.equals("Admin")) {
+            JOptionPane.showMessageDialog(this, "Login Successful! Redirecting to Admin Dashboard.");
+            new AdminDashboard().setVisible(true);
+        } else if (userType.equals("Passenger")) {
+            JOptionPane.showMessageDialog(this, "Login Successful! Redirecting to Passenger Dashboard.");
+            new PassengerDashboard().setVisible(true);
         }
+        this.dispose(); 
+    }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
