@@ -62,6 +62,7 @@ public class registrationForm extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
+        Back = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         UserType = new javax.swing.JComboBox<>();
         createaccount1 = new javax.swing.JButton();
@@ -73,7 +74,7 @@ public class registrationForm extends javax.swing.JFrame {
         mainpanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagefolder/regformwhite.png"))); // NOI18N
-        mainpanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, 520, 110));
+        mainpanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 30, 520, 110));
 
         jLabel2.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel2.setText("Phone Number");
@@ -213,6 +214,16 @@ public class registrationForm extends javax.swing.JFrame {
 
         mainpanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 630));
 
+        Back.setFont(new java.awt.Font("Arial", 3, 18)); // NOI18N
+        Back.setForeground(new java.awt.Color(255, 255, 255));
+        Back.setText("BACK");
+        Back.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BackMouseClicked(evt);
+            }
+        });
+        mainpanel.add(Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 0, -1, -1));
+
         jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagefolder/purp.png"))); // NOI18N
         mainpanel.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, -40, -1, -1));
 
@@ -303,13 +314,88 @@ private void initializeComboBox() {
     }//GEN-LAST:event_UserTypeActionPerformed
 
     private void createaccount1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createaccount1ActionPerformed
-        // TODO add your handling code here:
+       dbConnect dbc = new dbConnect();
+
+    String firstName = fn.getText().trim();
+    String lastName = ln.getText().trim();
+    String emailText = email.getText().trim();
+    String userType = (String) UserType.getSelectedItem();
+    String usernameText = username.getText().trim();
+    String passwordText = password.getText().trim();
+    String phoneNumber = phonenumber.getText().trim();
+    String passportNumber = passportnumber.getText().trim();
+
+    
+    if (firstName.isEmpty() || !firstName.matches("[a-zA-Z]+")) {
+        JOptionPane.showMessageDialog(null, "First Name is required and must contain only letters!");
+        return;
+    }
+    if (lastName.isEmpty() || !lastName.matches("[a-zA-Z]+")) {
+        JOptionPane.showMessageDialog(null, "Last Name is required and must contain only letters!");
+        return;
+    }
+
+    
+    if (emailText.isEmpty() || !emailText.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.com$")) {
+        JOptionPane.showMessageDialog(null, "Enter a valid email (must contain '@' and end with '.com')!");
+        return;
+    }
+    if (dbc.checkDuplicate("passengers", "p_email", emailText)) {
+        JOptionPane.showMessageDialog(null, "Email is already registered!");
+        return;
+    }
+
+   
+    if (userType == null || userType.equals("Select User Type")) {
+        JOptionPane.showMessageDialog(null, "Please select a User Type!");
+        return;
+    }
+
+   
+    if (usernameText.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Username is required!");
+        return;
+    }
+    if (dbc.checkDuplicate("passengers", "p_username", usernameText)) {
+        JOptionPane.showMessageDialog(null, "Username is already taken!");
+        return;
+    }
+
+    
+    if (passwordText.isEmpty() || passwordText.length() < 8) {
+        JOptionPane.showMessageDialog(null, "Password must be at least 8 characters long!");
+        return;
+    }
+
+   
+    if (phoneNumber.isEmpty() || !phoneNumber.matches("\\d+")) {
+        JOptionPane.showMessageDialog(null, "Phone Number is required and must contain only numbers!");
+        return;
+    }
+
+    
+    if (passportNumber.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Passport Number is required!");
+        return;
+    }
+
+   
+    if (dbc.insertData("INSERT INTO passengers (p_fname, p_lname, p_email, p_usertype, p_username, p_password, p_pnumber, p_passport, status) " +
+            "VALUES ('" + firstName + "', '" + lastName + "', '" + emailText + "', '" + userType + "', " +
+            "'" + usernameText + "', '" + passwordText + "', '" + phoneNumber + "', '" + passportNumber + "', 'Pending')") == 0) {
+        JOptionPane.showMessageDialog(null, "Registered Successfully!");
+    }
     }//GEN-LAST:event_createaccount1ActionPerformed
 
     private void CANCELMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CANCELMouseClicked
        new loginForm().setVisible(true);
        this.dispose();
     }//GEN-LAST:event_CANCELMouseClicked
+
+    private void BackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackMouseClicked
+       new loginForm().setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_BackMouseClicked
 
     /**
      * @param args the command line arguments
@@ -347,6 +433,7 @@ private void initializeComboBox() {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Back;
     private javax.swing.JButton CANCEL;
     private javax.swing.JComboBox<String> UserType;
     private javax.swing.JButton createaccount1;
