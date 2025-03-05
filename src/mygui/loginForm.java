@@ -2,6 +2,7 @@
 package mygui;
 import admin.AdminDashboard;
 import passenger.PassengerDashboard;
+import config.Session;
 
 import config.dbConnect;
 import java.sql.PreparedStatement;
@@ -42,11 +43,11 @@ jPasswordField1.setFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 14));
     });
     
     }
-     private String authenticateUser(String username, String password) {
-        dbConnect db = new dbConnect(); 
-        String userType = null;
-        
-       String query = "SELECT p_usertype, status FROM passengers WHERE p_username = ? AND p_password = ?";
+    private String authenticateUser(String username, String password) {
+    dbConnect db = new dbConnect();
+    String userType = null;
+
+    String query = "SELECT p_id, p_fname, p_lname, p_email, p_username, p_usertype, status FROM passengers WHERE p_username = ? AND p_password = ?";
 
     try {
         PreparedStatement pstmt = db.connect.prepareStatement(query);
@@ -55,12 +56,19 @@ jPasswordField1.setFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 14));
         ResultSet rs = pstmt.executeQuery();
 
         if (rs.next()) { 
-            String status = rs.getString("status");
-            if (status.equalsIgnoreCase("Active")) { 
-                userType = rs.getString("p_usertype"); 
-            } else { 
-                userType = "Pending"; 
-            }
+            
+            Session session = Session.getInstance();
+            session.setUid(rs.getString("p_id"));
+            session.setFname(rs.getString("p_fname")); 
+            session.setLname(rs.getString("p_lname")); 
+            session.setEmail(rs.getString("p_email"));
+            session.setUsername(rs.getString("p_username"));
+            session.setType(rs.getString("p_usertype"));
+            session.setStatus(rs.getString("status"));
+
+            userType = rs.getString("p_usertype"); 
+        } else {
+            System.out.println("User not found or incorrect password.");
         }
 
         rs.close();
@@ -70,8 +78,9 @@ jPasswordField1.setFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 14));
     }
 
     return userType; 
-    }
-    
+}
+
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -202,27 +211,23 @@ jPasswordField1.setFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 14));
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
        
-         String username = jTextField2.getText(); 
+          String username = jTextField2.getText(); 
     String password = new String(jPasswordField1.getPassword()); 
 
     String userType = authenticateUser(username, password); 
 
-    if (userType == null) { 
-       
-        JOptionPane.showMessageDialog(this, "Invalid username or password!", "Login Failed", JOptionPane.ERROR_MESSAGE);
-    } else if (userType.equals("Pending")) { 
-       
-        JOptionPane.showMessageDialog(this, "Your account is not yet activated. Please wait for approval.");
-    } else { 
-        
+    if (userType != null) { 
         if (userType.equals("Admin")) {
             JOptionPane.showMessageDialog(this, "Login Successful! Redirecting to Admin Dashboard.");
-            new AdminDashboard().setVisible(true);
+            new AdminDashboard().setVisible(true); 
+            this.dispose(); 
         } else if (userType.equals("Passenger")) {
             JOptionPane.showMessageDialog(this, "Login Successful! Redirecting to Passenger Dashboard.");
-            new PassengerDashboard().setVisible(true);
+            new PassengerDashboard().setVisible(true); 
+            this.dispose(); 
         }
-        this.dispose(); 
+    } else {
+        JOptionPane.showMessageDialog(this, "Invalid username or password!", "Login Failed", JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_jButton2ActionPerformed
 

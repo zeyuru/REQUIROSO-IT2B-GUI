@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 25, 2025 at 12:08 PM
+-- Generation Time: Mar 05, 2025 at 06:25 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -48,7 +48,7 @@ INSERT INTO `passengers` (`p_id`, `p_fname`, `p_lname`, `p_username`, `p_email`,
 (3, 'Aaron', 'Ruiz', 'zeyuru', 'requirosoaaronr@gmail.com', 'BSIT12345', '09455214472', '1234', 'Admin', 'Active'),
 (4, 'Aaron', 'Ruiz', 'ruiz1217', 'requirosoaaron@gmail.com', 'BSIT2C', '09455214472', '12345678', 'Admin', 'Pending'),
 (5, 'Aaron', 'Ruiz', 'aaron', 'ruiz@yahoo.com', 'BSIT2CCC', '0912345678', '12345678', 'Passenger', 'Pending'),
-(6, 'Jonash', 'Nogra', 'nash', 'Nogger@gmail.com', 'NerdBehavior', '096996969', '12345678', 'Passenger', 'Pending'),
+(6, 'Jonash', 'Nogra', 'nash', 'Nogger@gmail.com', 'NerdBehavior', '096996969', '12345678', 'Admin', 'Pending'),
 (7, 'Jericho', 'Alcala', 'jericho', 'eko@gmail.com', 'BSIT2C', '091234567', '12345678', 'Passenger', 'Active');
 
 --

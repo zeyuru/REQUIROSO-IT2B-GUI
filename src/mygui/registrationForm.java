@@ -153,7 +153,7 @@ public class registrationForm extends javax.swing.JFrame {
         jLabel8.setText("Passport Number");
         mainpanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 420, -1, -1));
 
-        jPanel1.setBackground(new java.awt.Color(0, 51, 153));
+        jPanel1.setBackground(new java.awt.Color(51, 0, 102));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel10.setBackground(new java.awt.Color(255, 255, 255));
