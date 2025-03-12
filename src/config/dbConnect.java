@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 
 
@@ -69,6 +70,36 @@ public boolean checkDuplicate(String table, String column, String value) {
     return exists;
 }
 
+//Function to update data
+        public void updateData(String sql){
+            try{
+                PreparedStatement pst = connect.prepareStatement(sql);
+                    int rowsUpdated = pst.executeUpdate();
+                        if(rowsUpdated > 0){
+                            JOptionPane.showMessageDialog(null, "Data Updated Successfully!");
+                        }else{
+                            System.out.println("Data Update Failed!");
+                        }
+                        pst.close();
+            }catch(SQLException ex){
+                System.out.println("Connection Error: "+ex);
+            }
+        
+        }
 
-
+        public boolean checkDuplicate(String tableName, String columnName, String value, int idToExclude) {
+    String sql = "SELECT COUNT(*) FROM " + tableName + " WHERE " + columnName + " = ? AND p_id != ?";
+    try (PreparedStatement pst = connect.prepareStatement(sql)) {
+        pst.setString(1, value);
+        pst.setInt(2, idToExclude);
+        ResultSet rs = pst.executeQuery();
+        if (rs.next()) {
+            return rs.getInt(1) > 0;
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+    return false;
+}
+        
 }

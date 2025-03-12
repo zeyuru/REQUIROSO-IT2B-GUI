@@ -114,11 +114,14 @@ public class AdminDashboard extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void userFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userFMouseClicked
-       new usersForm().setVisible(true);
-       this.dispose();
+        usersForm uf = new usersForm();
+   
+    uf.setVisible(true);
+    this.dispose();
     }//GEN-LAST:event_userFMouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked

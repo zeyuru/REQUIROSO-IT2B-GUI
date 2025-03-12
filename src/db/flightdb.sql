@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 05, 2025 at 06:25 PM
+-- Generation Time: Mar 12, 2025 at 07:20 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -35,7 +35,7 @@ CREATE TABLE `passengers` (
   `p_email` varchar(50) NOT NULL,
   `p_passport` varchar(50) NOT NULL,
   `p_pnumber` varchar(50) NOT NULL,
-  `p_password` varchar(50) NOT NULL,
+  `p_password` varchar(150) NOT NULL,
   `p_usertype` varchar(50) NOT NULL,
   `status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -45,11 +45,11 @@ CREATE TABLE `passengers` (
 --
 
 INSERT INTO `passengers` (`p_id`, `p_fname`, `p_lname`, `p_username`, `p_email`, `p_passport`, `p_pnumber`, `p_password`, `p_usertype`, `status`) VALUES
-(3, 'Aaron', 'Ruiz', 'zeyuru', 'requirosoaaronr@gmail.com', 'BSIT12345', '09455214472', '1234', 'Admin', 'Active'),
-(4, 'Aaron', 'Ruiz', 'ruiz1217', 'requirosoaaron@gmail.com', 'BSIT2C', '09455214472', '12345678', 'Admin', 'Pending'),
-(5, 'Aaron', 'Ruiz', 'aaron', 'ruiz@yahoo.com', 'BSIT2CCC', '0912345678', '12345678', 'Passenger', 'Pending'),
-(6, 'Jonash', 'Nogra', 'nash', 'Nogger@gmail.com', 'NerdBehavior', '096996969', '12345678', 'Admin', 'Pending'),
-(7, 'Jericho', 'Alcala', 'jericho', 'eko@gmail.com', 'BSIT2C', '091234567', '12345678', 'Passenger', 'Active');
+(1, 'skibidi', 'sigma', 'toiletduck', 'sigma@gmail.com', 'toiletduck', '1231231231', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8=', 'Passenger', 'Active'),
+(2, 'Jonash', 'Nogra', 'nash', 'nogger@gmail.com', '12312312312', '123123123123', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8=', 'Passenger', 'Pending'),
+(3, 'Jericho', 'Alcala', 'eko', 'eko@gmail.com', '123123123123', '123123123', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8=', 'Passenger', 'Active'),
+(4, 'Aaron', 'Ruiz', 'zeyuru', 'requirosoaaronr@gmail.com', '123123123', '09455214472', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8=', 'Admin', 'Active'),
+(21, 'John', 'Lloyd', 'lloyd', 'lloyd@gmail.com', '123123123', '123123123', '73l8gRjwLftklgfdXT+MdiMEjJwGPVMsyVxe16iYpk8=', 'Passenger', 'Active');
 
 --
 -- Indexes for dumped tables
@@ -69,7 +69,7 @@ ALTER TABLE `passengers`
 -- AUTO_INCREMENT for table `passengers`
 --
 ALTER TABLE `passengers`
-  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

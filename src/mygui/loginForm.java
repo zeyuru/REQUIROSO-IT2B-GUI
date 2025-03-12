@@ -5,6 +5,8 @@ import passenger.PassengerDashboard;
 import config.Session;
 
 import config.dbConnect;
+import config.passwordHasher;
+import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -47,37 +49,54 @@ jPasswordField1.setFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 14));
     dbConnect db = new dbConnect();
     String userType = null;
 
-    String query = "SELECT p_id, p_fname, p_lname, p_email, p_username, p_usertype, status FROM passengers WHERE p_username = ? AND p_password = ?";
+    String query = "SELECT p_id, p_fname, p_lname, p_email, p_username, p_usertype, status, p_password FROM passengers WHERE p_username = ?";
 
     try {
         PreparedStatement pstmt = db.connect.prepareStatement(query);
         pstmt.setString(1, username);
-        pstmt.setString(2, password);
         ResultSet rs = pstmt.executeQuery();
 
-        if (rs.next()) { 
-            
-            Session session = Session.getInstance();
-            session.setUid(rs.getString("p_id"));
-            session.setFname(rs.getString("p_fname")); 
-            session.setLname(rs.getString("p_lname")); 
-            session.setEmail(rs.getString("p_email"));
-            session.setUsername(rs.getString("p_username"));
-            session.setType(rs.getString("p_usertype"));
-            session.setStatus(rs.getString("status"));
+        if (rs.next()) {
+            String storedHashedPassword = rs.getString("p_password");
+            String enteredPasswordHash = passwordHasher.hashPassword(password);
+            String status = rs.getString("status");
 
-            userType = rs.getString("p_usertype"); 
+            
+            System.out.println("Stored Hashed Password: " + storedHashedPassword);
+            System.out.println("Entered Password Hash: " + enteredPasswordHash);
+
+            if (storedHashedPassword.equals(enteredPasswordHash)) {
+                if (status.equals("Active")) {
+                    Session session = Session.getInstance();
+                    session.setUid(rs.getString("p_id"));
+                    session.setFname(rs.getString("p_fname"));
+                    session.setLname(rs.getString("p_lname"));
+                    session.setEmail(rs.getString("p_email"));
+                    session.setUsername(rs.getString("p_username"));
+                    session.setType(rs.getString("p_usertype"));
+                    session.setStatus(status);
+
+                    userType = rs.getString("p_usertype");
+                } else {
+                    System.out.println("User is not Active. Please contact an Admin.");
+                    JOptionPane.showMessageDialog(this, "User is not Active. Please contact an Admin.", "Account Pending", JOptionPane.WARNING_MESSAGE);
+                }
+            } else {
+                System.out.println("Incorrect password.");
+                JOptionPane.showMessageDialog(this, "Incorrect password", "Login Failed", JOptionPane.ERROR_MESSAGE);
+            }
         } else {
-            System.out.println("User not found or incorrect password.");
+            System.out.println("User not found.");
+            JOptionPane.showMessageDialog(this, "Account does not exist", "Login Failed", JOptionPane.ERROR_MESSAGE);
         }
 
         rs.close();
         pstmt.close();
-    } catch (SQLException e) {
-        System.out.println("Database Error: " + e.getMessage());
+    } catch (SQLException | NoSuchAlgorithmException e) {
+        System.out.println("Database/Hashing Error: " + e.getMessage());
     }
 
-    return userType; 
+    return userType;
 }
 
 
@@ -226,9 +245,7 @@ jPasswordField1.setFont(new java.awt.Font("Verdana", java.awt.Font.BOLD, 14));
             new PassengerDashboard().setVisible(true); 
             this.dispose(); 
         }
-    } else {
-        JOptionPane.showMessageDialog(this, "Invalid username or password!", "Login Failed", JOptionPane.ERROR_MESSAGE);
-    }
+    } 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed

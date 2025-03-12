@@ -1,6 +1,8 @@
 
 package mygui;
 import config.dbConnect;
+import config.passwordHasher;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -350,7 +352,6 @@ private void initializeComboBox() {
         JOptionPane.showMessageDialog(null, "Please select a User Type!");
         return;
     }
-
    
     if (usernameText.isEmpty()) {
         JOptionPane.showMessageDialog(null, "Username is required!");
@@ -378,11 +379,17 @@ private void initializeComboBox() {
         JOptionPane.showMessageDialog(null, "Passport Number is required!");
         return;
     }
-
-   
+       String hashedPassword;
+    try {
+        hashedPassword = passwordHasher.hashPassword(passwordText); 
+    } catch (NoSuchAlgorithmException e) {
+        JOptionPane.showMessageDialog(null, "Error hashing password: " + e.getMessage());
+        return;
+    }
+    
     if (dbc.insertData("INSERT INTO passengers (p_fname, p_lname, p_email, p_usertype, p_username, p_password, p_pnumber, p_passport, status) " +
             "VALUES ('" + firstName + "', '" + lastName + "', '" + emailText + "', '" + userType + "', " +
-            "'" + usernameText + "', '" + passwordText + "', '" + phoneNumber + "', '" + passportNumber + "', 'Pending')") == 0) {
+            "'" + usernameText + "', '" + hashedPassword + "', '" + phoneNumber + "', '" + passportNumber + "', 'Pending')") == 0) {
         JOptionPane.showMessageDialog(null, "Registered Successfully!");
     }
     }//GEN-LAST:event_createaccount1ActionPerformed

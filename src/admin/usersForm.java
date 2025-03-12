@@ -3,10 +3,12 @@ package admin;
 
 import config.Session;
 import config.dbConnect;
+import java.awt.Color;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
 import net.proteanit.sql.DbUtils;
 
 
@@ -17,7 +19,7 @@ public class usersForm extends javax.swing.JFrame {
         initComponents();
         displayData();
         
-          
+          Color hovercolor = new Color(200, 200, 200);
        setSize(950, 600);  
     setLocationRelativeTo(null); 
  
@@ -70,6 +72,8 @@ public void displayData(){
         jButtonChangeStatus = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        EditUser1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         acc_id = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -153,6 +157,24 @@ public void displayData(){
         jPanel4.setBackground(new java.awt.Color(0, 51, 204));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel6.setBackground(new java.awt.Color(51, 0, 102));
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        EditUser1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        EditUser1.setForeground(new java.awt.Color(255, 255, 255));
+        EditUser1.setText("EDIT");
+        EditUser1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EditUser1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                EditUser1MouseEntered(evt);
+            }
+        });
+        jPanel6.add(EditUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+
+        jPanel4.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 140, 80));
+
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/admin/team.png"))); // NOI18N
         jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, -10, -1, -1));
 
@@ -181,6 +203,12 @@ public void displayData(){
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 AddUserMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                AddUserMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                AddUserMouseExited(evt);
+            }
         });
         jPanel5.add(AddUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
@@ -200,6 +228,7 @@ public void displayData(){
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
@@ -278,9 +307,65 @@ public void displayData(){
     }//GEN-LAST:event_formWindowActivated
 
     private void AddUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddUserMouseClicked
-        new createUserForm().setVisible(true);
+        new createUserForm()
+                .setVisible(true);
        this.dispose();
     }//GEN-LAST:event_AddUserMouseClicked
+
+    private void EditUser1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditUser1MouseClicked
+        int rowIndex = usersTable.getSelectedRow();
+
+    if (rowIndex < 0) {
+        JOptionPane.showMessageDialog(null, "Please Select an Item!");
+    } else {
+        createUserForm crf = new createUserForm();
+        try {
+            dbConnect db = new dbConnect();
+            TableModel tbl = usersTable.getModel();
+            int userId = (int) tbl.getValueAt(rowIndex, 0); // Get the userID from the first column
+
+            ResultSet rs = db.getData("SELECT * FROM passengers WHERE p_id = " + userId); // Use parameter instead of string concatenation
+
+            if (rs.next()) {
+                crf.userID.setText(String.valueOf(userId)); // Set the userID text field
+
+                crf.fn1.setText(rs.getString("p_fname"));
+                crf.ln.setText(rs.getString("p_lname"));
+                crf.email.setText(rs.getString("p_email"));
+                crf.username.setText(rs.getString("p_username"));
+                crf.password.setText(rs.getString("p_password"));
+                crf.phonenumber.setText(rs.getString("p_pnumber"));
+                crf.passportnumber.setText(rs.getString("p_passport"));
+                crf.UserType1.setSelectedItem(rs.getString("p_usertype"));
+                crf.UserStatus.setSelectedItem(rs.getString("status"));
+
+                crf.update.setEnabled(true);
+                crf.addacc.setEnabled(false);
+                crf.setVisible(true);
+                this.dispose(); // Moved dispose after setVisible.
+            } else {
+                JOptionPane.showMessageDialog(null, "Record not found!");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Database error: " + ex.getMessage());
+        }
+    }
+ 
+    }//GEN-LAST:event_EditUser1MouseClicked
+
+    private void EditUser1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditUser1MouseEntered
+        
+    }//GEN-LAST:event_EditUser1MouseEntered
+
+    private void AddUserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddUserMouseEntered
+        
+        
+    }//GEN-LAST:event_AddUserMouseEntered
+
+    private void AddUserMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddUserMouseExited
+       
+    }//GEN-LAST:event_AddUserMouseExited
 
     
     public static void main(String args[]) {
@@ -318,6 +403,7 @@ public void displayData(){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AddUser;
+    private javax.swing.JLabel EditUser1;
     private javax.swing.JLabel acc_id;
     private javax.swing.JButton btnSetPending;
     private javax.swing.JButton jButtonChangeStatus;
@@ -333,6 +419,7 @@ public void displayData(){
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable usersTable;
     // End of variables declaration//GEN-END:variables
