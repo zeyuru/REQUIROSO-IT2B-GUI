@@ -241,6 +241,11 @@ public class AccountDetails extends javax.swing.JFrame {
                     OldPass1.setText("");
                     newPass1.setText("");
                     confirmPass.setText("");
+                    
+                    PassengerDashboard pd = new PassengerDashboard(); 
+               
+                   pd.setVisible(true); 
+                      this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, "Incorrect old password.", "Error", JOptionPane.ERROR_MESSAGE);
                 }

@@ -338,10 +338,10 @@ private void initializeComboBox() {
     }
 
     
-    if (emailText.isEmpty() || !emailText.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.com$")) {
-        JOptionPane.showMessageDialog(null, "Enter a valid email (must contain '@' and end with '.com')!");
-        return;
-    }
+    if (emailText.isEmpty() || !emailText.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.+[a-zA-Z0-9.-]+$")) {
+    JOptionPane.showMessageDialog(null, "Enter a valid email)!");
+    return;
+}
     if (dbc.checkDuplicate("passengers", "p_email", emailText)) {
         JOptionPane.showMessageDialog(null, "Email is already registered!");
         return;
@@ -389,8 +389,14 @@ private void initializeComboBox() {
     
     if (dbc.insertData("INSERT INTO passengers (p_fname, p_lname, p_email, p_usertype, p_username, p_password, p_pnumber, p_passport, status) " +
             "VALUES ('" + firstName + "', '" + lastName + "', '" + emailText + "', '" + userType + "', " +
-            "'" + usernameText + "', '" + hashedPassword + "', '" + phoneNumber + "', '" + passportNumber + "', 'Pending')") == 0) {
+            "'" + usernameText + "', '" + hashedPassword + "', '" + phoneNumber + "', '" + passportNumber + "', 'Pending')") > 0) {
         JOptionPane.showMessageDialog(null, "Registered Successfully!");
+       
+                  loginForm loginForm = new loginForm(); 
+               
+                   loginForm.setVisible(true); 
+                      this.dispose();
+                  
     }
     }//GEN-LAST:event_createaccount1ActionPerformed
 

@@ -36,7 +36,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        userF = new javax.swing.JLabel();
+        userLogo = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         acc_name = new javax.swing.JLabel();
@@ -74,18 +74,28 @@ public class AdminDashboard extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("PASSENGERS");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
+        jLabel3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel3KeyPressed(evt);
+            }
+        });
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 250, 60));
 
         jPanel3.setBackground(new java.awt.Color(51, 0, 102));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        userF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagefolder/user.png"))); // NOI18N
-        userF.addMouseListener(new java.awt.event.MouseAdapter() {
+        userLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagefolder/user.png"))); // NOI18N
+        userLogo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                userFMouseClicked(evt);
+                userLogoMouseClicked(evt);
             }
         });
-        jPanel3.add(userF, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -10, -1, -1));
+        jPanel3.add(userLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -10, -1, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 280, 230));
 
@@ -106,23 +116,19 @@ public class AdminDashboard extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void userFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userFMouseClicked
-        usersForm uf = new usersForm();
-   
-    uf.setVisible(true);
-    this.dispose();
-    }//GEN-LAST:event_userFMouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
           new loginForm().setVisible(true);
@@ -134,6 +140,22 @@ public class AdminDashboard extends javax.swing.JFrame {
     
     acc_name.setText("" + session.getFname());
     }//GEN-LAST:event_formWindowActivated
+
+    private void userLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userLogoMouseClicked
+         usersForm uf = new usersForm();
+        uf.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_userLogoMouseClicked
+
+    private void jLabel3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel3KeyPressed
+        
+    }//GEN-LAST:event_jLabel3KeyPressed
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+      usersForm uf = new usersForm();
+        uf.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel3MouseClicked
 
     
     public static void main(String args[]) {
@@ -178,6 +200,6 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JLabel userF;
+    private javax.swing.JLabel userLogo;
     // End of variables declaration//GEN-END:variables
 }
