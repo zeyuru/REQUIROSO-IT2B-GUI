@@ -62,15 +62,17 @@ public void displayData(){
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         usersTable = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        btnSetPending = new javax.swing.JButton();
-        jButtonChangeStatus = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        jButtonChangeStatus = new javax.swing.JButton();
+        btnSetPending = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         EditUser1 = new javax.swing.JLabel();
@@ -91,18 +93,22 @@ public void displayData(){
         jPanel1.setBackground(new java.awt.Color(102, 204, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(51, 0, 102));
+        jPanel2.setBackground(new java.awt.Color(0, 51, 204));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 40, -1, -1));
+
+        jPanel7.setBackground(new java.awt.Color(51, 0, 102));
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("PASSENGERS FORM");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 350, 50));
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 40, -1, -1));
+        jPanel7.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 350, 50));
+
+        jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 380, 80));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 470, 120));
 
-        usersTable.setBackground(new java.awt.Color(102, 204, 255));
         usersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -115,7 +121,7 @@ public void displayData(){
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 730, 500));
 
-        jPanel3.setBackground(new java.awt.Color(51, 204, 255));
+        jPanel3.setBackground(new java.awt.Color(0, 51, 204));
         jPanel3.setForeground(new java.awt.Color(51, 204, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -123,24 +129,6 @@ public void displayData(){
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("CHANGE USER STATUS");
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, -1, -1));
-
-        btnSetPending.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btnSetPending.setText("Pending");
-        btnSetPending.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSetPendingActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btnSetPending, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, 90, 30));
-
-        jButtonChangeStatus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButtonChangeStatus.setText("Active");
-        jButtonChangeStatus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonChangeStatusActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jButtonChangeStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 90, 30));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -151,6 +139,28 @@ public void displayData(){
             }
         });
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 0, -1, -1));
+
+        jPanel8.setBackground(new java.awt.Color(51, 0, 102));
+        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel3.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 290, 30));
+
+        jButtonChangeStatus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButtonChangeStatus.setText("Active");
+        jButtonChangeStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonChangeStatusActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButtonChangeStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 90, 30));
+
+        btnSetPending.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnSetPending.setText("Pending");
+        btnSetPending.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSetPendingActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnSetPending, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, 90, 30));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 0, 490, 120));
 
@@ -420,6 +430,8 @@ public void displayData(){
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable usersTable;
     // End of variables declaration//GEN-END:variables

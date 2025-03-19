@@ -48,7 +48,7 @@ public class AdminDashboard extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(102, 204, 255));
+        jPanel1.setBackground(new java.awt.Color(51, 204, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(51, 0, 102));
@@ -99,7 +99,7 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 280, 230));
 
-        jPanel4.setBackground(new java.awt.Color(0, 51, 204));
+        jPanel4.setBackground(new java.awt.Color(51, 0, 255));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagefolder/man (1).png"))); // NOI18N

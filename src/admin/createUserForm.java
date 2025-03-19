@@ -291,9 +291,8 @@ public class createUserForm extends javax.swing.JFrame {
     }//GEN-LAST:event_phonenumberActionPerformed
 
     private void addaccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addaccActionPerformed
-       dbConnect dbc = new dbConnect();
+      dbConnect dbc = new dbConnect();
 
-    
     String firstName = fn1.getText().trim();
     String lastName = ln.getText().trim();
     String emailText = email.getText().trim();
@@ -304,48 +303,63 @@ public class createUserForm extends javax.swing.JFrame {
     String phoneNumber = phonenumber.getText().trim();
     String passportNumber = passportnumber.getText().trim();
 
-    
-    int idToUpdate;
-    try {
-        idToUpdate = Integer.parseInt(userID.getText().trim()); 
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(null, "Invalid User ID!");
-        return;
-    }
-
-    
+    // Check if any fields are empty
     if (firstName.isEmpty() || lastName.isEmpty() || emailText.isEmpty() || usernameText.isEmpty() || passwordText.isEmpty() || phoneNumber.isEmpty() || passportNumber.isEmpty() || selectedUserType == null || selectedUserStatus == null || selectedUserType.equals("Select User Type") || selectedUserStatus.equals("Select User Status")) {
         JOptionPane.showMessageDialog(null, "Please fill in all fields!");
         return;
     }
 
-    
-    if (dbc.checkDuplicate("passengers", "p_username", usernameText, idToUpdate)) {
+    // Check for duplicates
+    if (dbc.checkDuplicate("passengers", "p_username", usernameText, 0)) { // Pass 0 for new account
         JOptionPane.showMessageDialog(null, "Username already exists!");
         return;
     }
 
-   
-    if (dbc.checkDuplicate("passengers", "p_email", emailText, idToUpdate)) {
+    if (dbc.checkDuplicate("passengers", "p_email", emailText, 0)) { // Pass 0 for new account
         JOptionPane.showMessageDialog(null, "Email already exists!");
         return;
     }
 
-    
-    String updateQuery = "UPDATE passengers SET " +
-            "p_fname = '" + firstName + "', " +
-            "p_lname = '" + lastName + "', " +
-            "p_email = '" + emailText + "', " +
-            "p_usertype = '" + selectedUserType + "', " +
-            "p_username = '" + usernameText + "', " +
-            "p_password = '" + passwordText + "', " +
-            "p_pnumber = '" + phoneNumber + "', " +
-            "p_passport = '" + passportNumber + "', " +
-            "status = '" + selectedUserStatus + "' " +
-            "WHERE p_id = " + idToUpdate;
+    // Check if userID field is empty. If empty, it's a new account
+    if (userID.getText().trim().isEmpty()) {
+        // Insert new account
+        String insertQuery = "INSERT INTO passengers (p_fname, p_lname, p_email, p_usertype, p_username, p_password, p_pnumber, p_passport, status) " +
+                "VALUES ('" + firstName + "', '" + lastName + "', '" + emailText + "', '" + selectedUserType + "', '" + usernameText + "', '" + passwordText + "', '" + phoneNumber + "', '" + passportNumber + "', '" + selectedUserStatus + "')";
 
-       
+        dbc.insertData(insertQuery);
+        JOptionPane.showMessageDialog(null, "Account added successfully!");
+    } else {
+        // Update existing account
+        int idToUpdate;
+        try {
+            idToUpdate = Integer.parseInt(userID.getText().trim());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Invalid User ID!");
+            return;
+        }
+
+        String updateQuery = "UPDATE passengers SET " +
+                "p_fname = '" + firstName + "', " +
+                "p_lname = '" + lastName + "', " +
+                "p_email = '" + emailText + "', " +
+                "p_usertype = '" + selectedUserType + "', " +
+                "p_username = '" + usernameText + "', " +
+                "p_password = '" + passwordText + "', " +
+                "p_pnumber = '" + phoneNumber + "', " +
+                "p_passport = '" + passportNumber + "', " +
+                "status = '" + selectedUserStatus + "' " +
+                "WHERE p_id = " + idToUpdate;
+
         dbc.updateData(updateQuery);
+        JOptionPane.showMessageDialog(null, "Account updated successfully!");
+        
+    
+    }
+         AdminDashboard AdminDashboard = new AdminDashboard();
+   AdminDashboard.setVisible(true);
+
+    
+    this.dispose();
     }//GEN-LAST:event_addaccActionPerformed
 
     private void UserType1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserType1ActionPerformed
@@ -369,7 +383,6 @@ public class createUserForm extends javax.swing.JFrame {
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
           dbConnect dbc = new dbConnect();
 
-   
     String firstName = fn1.getText().trim();
     String lastName = ln.getText().trim();
     String emailText = email.getText().trim();
@@ -380,34 +393,29 @@ public class createUserForm extends javax.swing.JFrame {
     String phoneNumber = phonenumber.getText().trim();
     String passportNumber = passportnumber.getText().trim();
 
-   
     int idToUpdate;
     try {
-        idToUpdate = Integer.parseInt(userID.getText().trim()); 
+        idToUpdate = Integer.parseInt(userID.getText().trim());
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(null, "Invalid User ID!");
         return;
     }
 
-  
     if (firstName.isEmpty() || lastName.isEmpty() || emailText.isEmpty() || usernameText.isEmpty() || passwordText.isEmpty() || phoneNumber.isEmpty() || passportNumber.isEmpty() || selectedUserType == null || selectedUserStatus == null || selectedUserType.equals("Select User Type") || selectedUserStatus.equals("Select User Status")) {
         JOptionPane.showMessageDialog(null, "Please fill in all fields!");
         return;
     }
 
-    
     if (dbc.checkDuplicate("passengers", "p_username", usernameText, idToUpdate)) {
         JOptionPane.showMessageDialog(null, "Username already exists!");
         return;
     }
 
-    
     if (dbc.checkDuplicate("passengers", "p_email", emailText, idToUpdate)) {
         JOptionPane.showMessageDialog(null, "Email already exists!");
         return;
     }
 
-    
     String updateQuery = "UPDATE passengers SET " +
             "p_fname = '" + firstName + "', " +
             "p_lname = '" + lastName + "', " +
@@ -420,8 +428,14 @@ public class createUserForm extends javax.swing.JFrame {
             "status = '" + selectedUserStatus + "' " +
             "WHERE p_id = " + idToUpdate;
 
-      
-        dbc.updateData(updateQuery);
+    dbc.updateData(updateQuery);
+
+    
+
+    // Navigate back to AdminDashboard
+    AdminDashboard adminDashboard = new AdminDashboard();
+    adminDashboard.setVisible(true);
+    this.dispose();
     }//GEN-LAST:event_updateActionPerformed
 
     private void Delete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Delete1ActionPerformed
