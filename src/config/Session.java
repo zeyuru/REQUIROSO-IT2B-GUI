@@ -11,6 +11,9 @@ public class Session {
           private String username;
           private String type;
           private String status;
+    private int p_id;
+    private int pId;
+    private String userType;
           
           
           private Session(){
@@ -87,6 +90,26 @@ public class Session {
         this.status = status;
     }
           
-          
-          
+         public int getUserId() {
+ return this.p_id; // Or whatever stores your passenger ID
+} 
+       public void setP_id(int p_id) {
+        this.p_id = p_id;
+    } 
+         
+        public int getPId() {
+        return pId;
+    }
+    
+     public void setPId(int pId) {
+        this.pId = pId;
+    }
+     
+    public String getUserType() {
+        return userType;
+    }
+    
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
 }
