@@ -86,17 +86,17 @@ public class AccountDetails extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -10, 1040, 100));
 
-        jPanel3.setBackground(new java.awt.Color(102, 0, 102));
+        jPanel3.setBackground(new java.awt.Color(51, 204, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagefolder/bigman.png"))); // NOI18N
         jLabel2.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 jLabel2AncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, 120));
@@ -104,7 +104,7 @@ public class AccountDetails extends javax.swing.JFrame {
         accUser.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         accUser.setForeground(new java.awt.Color(255, 255, 255));
         accUser.setText("User");
-        jPanel3.add(accUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 130, 40));
+        jPanel3.add(accUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 130, 40));
 
         userID.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         userID.setForeground(new java.awt.Color(255, 255, 255));

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2025 at 11:51 AM
+-- Generation Time: May 14, 2025 at 03:10 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,7 +40,7 @@ CREATE TABLE `bookings` (
 --
 
 INSERT INTO `bookings` (`booking_id`, `passenger_id`, `flight_id`, `booking_date`, `status`) VALUES
-(8, 35, 3, '2025-05-05 01:07:33', 'Confirmed'),
+(8, 35, 3, '2025-05-05 01:07:33', 'Cancelled'),
 (9, 36, 4, '2025-05-05 17:12:14', 'Confirmed'),
 (10, 36, 4, '2025-05-05 17:20:43', 'Confirmed'),
 (11, 35, 4, '2025-05-05 17:26:23', 'Confirmed');
@@ -101,7 +101,6 @@ CREATE TABLE `passengers` (
 
 INSERT INTO `passengers` (`p_id`, `p_fname`, `p_lname`, `p_username`, `p_email`, `p_passport`, `p_pnumber`, `p_password`, `p_usertype`, `status`, `p_image`, `security_question`, `security_answer`) VALUES
 (28, 'Aaron', 'Ruiz', 'zeyuru', 'requirosoaaronr@gmail.com', 'B12345', '09455214472', 'ky88G1YlfOhTmsJp16q0JVDaz4gY0HXwvfGZBWKq4+8=', 'Admin', 'Active', 'src/userimages/blazing.png', 'What was your first pet\'s name?', 'DHpIG8tR8uRj+gVoUiWVMFWLTwXkzd7ayRhf6yQ3eSw='),
-(29, 'Fritzie', 'Waskin', 'waskin', 'waskin@gmail.com', 'BA12345', '0912345678', 'ky88G1YlfOhTmsJp16q0JVDaz4gY0HXwvfGZBWKq4+8=', 'Passenger', 'Pending', '', 'What city were you born in?', '8fTAdauUny/Z6EdZhi3IiXxOVM8JP1ea+5j7zNgF0NE='),
 (30, 'Jonash', 'Nogra', 'nash', 'nashu@gmail.com', 'CA16531', '0998765332', 'ky88G1YlfOhTmsJp16q0JVDaz4gY0HXwvfGZBWKq4+8=', 'Admin', 'Active', '', 'What was your first pet\'s name?', 'LzNhKxiqi16RLkczY1cCdvjq2TRuykwprc5pIlj33r4='),
 (31, 'John', 'Lloyd', 'lloyd', 'lloyd@yahoo.com', 'BBKA213', '0986521421', 'ky88G1YlfOhTmsJp16q0JVDaz4gY0HXwvfGZBWKq4+8=', 'Passenger', 'Pending', 'src/userimages/bigman.png', 'What was your first pet\'s name?', 'JU3FtMxkBHEgdtR1h3oRETmNIGDbD0V7tfsyuuo9wbw='),
 (32, 'Jodee', 'Somera', 'jd', 'jd@yahoo.com', 'BBKA321', '0936216231', 'ky88G1YlfOhTmsJp16q0JVDaz4gY0HXwvfGZBWKq4+8=', 'Passenger', 'Pending', 'default.jpg', 'What was your first pet\'s name?', 'rT5p6aqGBlfMZHZ3D+JT0IGYdGufz53DGGtH64XDAzU='),
@@ -129,35 +128,45 @@ CREATE TABLE `system_logs` (
 --
 
 INSERT INTO `system_logs` (`log_id`, `p_id`, `user_type`, `action`, `timestamp`) VALUES
-(1, -1, 'ADMIN', 'LOGIN', '2025-05-05 02:25:29'),
-(2, -1, 'PASSENGER', 'LOGIN', '2025-05-05 02:26:39'),
-(3, 0, 'PASSENGER', 'LOGOUT', '2025-05-05 02:26:40'),
-(4, -1, 'ADMIN', 'LOGIN', '2025-05-05 02:26:43'),
-(5, -1, 'ADMIN', 'LOGIN', '2025-05-05 02:28:08'),
-(6, -1, 'ADMIN', 'LOGIN', '2025-05-05 02:28:44'),
 (7, 28, 'ADMIN', 'LOGIN', '2025-05-05 17:08:15'),
 (8, 28, 'ADMIN', 'LOGIN', '2025-05-05 17:10:52'),
-(9, 0, 'ADMIN', 'LOGOUT', '2025-05-05 17:11:09'),
 (10, 36, 'PASSENGER', 'LOGIN', '2025-05-05 17:11:13'),
-(11, 0, 'PASSENGER', 'LOGOUT', '2025-05-05 17:11:31'),
 (12, 36, 'PASSENGER', 'LOGIN', '2025-05-05 17:11:34'),
-(13, 0, 'PASSENGER', 'LOGOUT', '2025-05-05 17:11:36'),
 (14, 28, 'ADMIN', 'LOGIN', '2025-05-05 17:11:39'),
 (15, 36, 'PASSENGER', 'LOGIN', '2025-05-05 17:11:59'),
-(16, 0, 'PASSENGER', 'LOGOUT', '2025-05-05 17:12:48'),
 (17, 35, 'PASSENGER', 'LOGIN', '2025-05-05 17:15:00'),
 (18, 36, 'PASSENGER', 'LOGIN', '2025-05-05 17:15:59'),
 (19, 36, 'PASSENGER', 'LOGIN', '2025-05-05 17:16:43'),
-(20, 0, 'PASSENGER', 'LOGOUT', '2025-05-05 17:16:54'),
 (21, 36, 'PASSENGER', 'LOGIN', '2025-05-05 17:17:27'),
-(22, 0, 'PASSENGER', 'LOGOUT', '2025-05-05 17:17:37'),
 (23, 35, 'PASSENGER', 'LOGIN', '2025-05-05 17:19:54'),
 (24, 36, 'PASSENGER', 'LOGIN', '2025-05-05 17:20:36'),
 (25, 35, 'PASSENGER', 'LOGIN', '2025-05-05 17:26:13'),
 (26, 28, 'ADMIN', 'LOGIN', '2025-05-05 17:27:01'),
 (27, 28, 'ADMIN', 'LOGIN', '2025-05-05 17:27:51'),
 (28, 35, 'PASSENGER', 'LOGIN', '2025-05-05 17:32:03'),
-(29, 0, 'PASSENGER', 'LOGOUT', '2025-05-05 17:32:13');
+(30, 35, 'PASSENGER', 'LOGIN', '2025-05-05 21:20:42'),
+(31, 35, 'PASSENGER', 'LOGIN', '2025-05-05 21:22:18'),
+(33, 28, 'ADMIN', 'LOGIN', '2025-05-05 21:25:51'),
+(34, 28, 'ADMIN', 'LOGIN', '2025-05-14 17:49:32'),
+(36, 35, 'PASSENGER', 'LOGIN', '2025-05-14 17:50:11'),
+(37, 35, 'PASSENGER', 'LOGIN', '2025-05-14 17:57:30'),
+(38, 35, 'PASSENGER', 'LOGIN', '2025-05-14 17:58:14'),
+(39, 28, 'ADMIN', 'LOGIN', '2025-05-14 18:00:47'),
+(41, 35, 'PASSENGER', 'LOGIN', '2025-05-14 18:00:51'),
+(43, 35, 'PASSENGER', 'LOGIN', '2025-05-14 19:26:43'),
+(44, 35, 'PASSENGER', 'LOGIN', '2025-05-14 19:27:23'),
+(45, 35, 'PASSENGER', 'LOGIN', '2025-05-14 19:29:35'),
+(46, 28, 'ADMIN', 'LOGIN', '2025-05-14 19:38:03'),
+(47, 28, 'ADMIN', 'LOGIN', '2025-05-14 19:39:42'),
+(48, 35, 'PASSENGER', 'LOGIN', '2025-05-14 19:50:31'),
+(49, 35, 'PASSENGER', 'LOGIN', '2025-05-14 19:51:19'),
+(50, 35, 'PASSENGER', 'LOGIN', '2025-05-14 19:54:19'),
+(51, 35, 'PASSENGER', 'LOGIN', '2025-05-14 19:54:59'),
+(52, 35, 'PASSENGER', 'LOGIN', '2025-05-14 19:55:20'),
+(53, 35, 'PASSENGER', 'LOGIN', '2025-05-14 20:59:22'),
+(54, 28, 'ADMIN', 'LOGIN', '2025-05-14 21:05:22'),
+(55, 28, 'ADMIN', 'LOGIN', '2025-05-14 21:07:43'),
+(56, 35, 'PASSENGER', 'LOGIN', '2025-05-14 21:09:10');
 
 --
 -- Indexes for dumped tables
@@ -188,7 +197,8 @@ ALTER TABLE `passengers`
 -- Indexes for table `system_logs`
 --
 ALTER TABLE `system_logs`
-  ADD PRIMARY KEY (`log_id`);
+  ADD PRIMARY KEY (`log_id`),
+  ADD KEY `fk_logs_passenger` (`p_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -216,7 +226,7 @@ ALTER TABLE `passengers`
 -- AUTO_INCREMENT for table `system_logs`
 --
 ALTER TABLE `system_logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- Constraints for dumped tables
@@ -229,6 +239,12 @@ ALTER TABLE `bookings`
   ADD CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`passenger_id`) REFERENCES `passengers` (`p_id`),
   ADD CONSTRAINT `bookings_ibfk_2` FOREIGN KEY (`flight_id`) REFERENCES `flights` (`flight_id`),
   ADD CONSTRAINT `fk_passenger` FOREIGN KEY (`passenger_id`) REFERENCES `passengers` (`p_id`);
+
+--
+-- Constraints for table `system_logs`
+--
+ALTER TABLE `system_logs`
+  ADD CONSTRAINT `fk_logs_passenger` FOREIGN KEY (`p_id`) REFERENCES `passengers` (`p_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

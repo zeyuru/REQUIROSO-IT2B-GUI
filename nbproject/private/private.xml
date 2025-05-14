@@ -3,12 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/AaronPC/Desktop/GUI%20CLONE/REQUIROSO-IT2B-GUI/src/mygui/loginForm.java</file>
             <file>file:/C:/Users/AaronPC/Desktop/GUI%20CLONE/REQUIROSO-IT2B-GUI/src/passenger/PassengerDashboard.java</file>
-            <file>file:/C:/Users/AaronPC/Desktop/GUI%20CLONE/REQUIROSO-IT2B-GUI/src/admin/AdminDashboard.java</file>
             <file>file:/C:/Users/AaronPC/Desktop/GUI%20CLONE/REQUIROSO-IT2B-GUI/src/admin/individualPrinting.java</file>
-            <file>file:/C:/Users/AaronPC/Desktop/GUI%20CLONE/REQUIROSO-IT2B-GUI/src/admin/logs.java</file>
-            <file>file:/C:/Users/AaronPC/Desktop/GUI%20CLONE/REQUIROSO-IT2B-GUI/src/admin/FlightsInformation.java</file>
-            <file>file:/C:/Users/AaronPC/Desktop/GUI%20CLONE/REQUIROSO-IT2B-GUI/src/admin/FlightsForm.java</file>
+            <file>file:/C:/Users/AaronPC/Desktop/GUI%20CLONE/REQUIROSO-IT2B-GUI/src/admin/usersForm.java</file>
+            <file>file:/C:/Users/AaronPC/Desktop/GUI%20CLONE/REQUIROSO-IT2B-GUI/src/passenger/MyBookings.java</file>
+            <file>file:/C:/Users/AaronPC/Desktop/GUI%20CLONE/REQUIROSO-IT2B-GUI/src/config/PanelPrinter.java</file>
+            <file>file:/C:/Users/AaronPC/Desktop/GUI%20CLONE/REQUIROSO-IT2B-GUI/src/passenger/MyBookingsPrinting.java</file>
         </group>
     </open-files>
 </project-private>
