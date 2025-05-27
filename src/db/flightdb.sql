@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 14, 2025 at 03:10 PM
+-- Generation Time: May 27, 2025 at 07:24 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -32,7 +32,7 @@ CREATE TABLE `bookings` (
   `passenger_id` int(11) NOT NULL,
   `flight_id` int(11) NOT NULL,
   `booking_date` datetime NOT NULL,
-  `status` varchar(50) NOT NULL
+  `status` enum('Pending','Accepted','Rejected') DEFAULT 'Pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -40,10 +40,12 @@ CREATE TABLE `bookings` (
 --
 
 INSERT INTO `bookings` (`booking_id`, `passenger_id`, `flight_id`, `booking_date`, `status`) VALUES
-(8, 35, 3, '2025-05-05 01:07:33', 'Cancelled'),
-(9, 36, 4, '2025-05-05 17:12:14', 'Confirmed'),
-(10, 36, 4, '2025-05-05 17:20:43', 'Confirmed'),
-(11, 35, 4, '2025-05-05 17:26:23', 'Confirmed');
+(8, 35, 3, '2025-05-05 01:07:33', ''),
+(9, 36, 4, '2025-05-05 17:12:14', ''),
+(10, 36, 4, '2025-05-05 17:20:43', ''),
+(11, 35, 4, '2025-05-05 17:26:23', ''),
+(12, 35, 3, '2025-05-28 00:19:10', 'Accepted'),
+(13, 35, 5, '2025-05-28 00:41:34', 'Rejected');
 
 -- --------------------------------------------------------
 
@@ -69,9 +71,9 @@ CREATE TABLE `flights` (
 --
 
 INSERT INTO `flights` (`flight_id`, `flight_number`, `departure_airport`, `arrival_airport`, `departure_time`, `arrival_time`, `airline`, `capacity`, `price`, `status`) VALUES
-(3, 'CA12345', 'MACTAN AIRPORT', 'MANILA AIRPORT', '2025-05-03 15:00:00', '2025-05-03 18:00:00', 'MATRIX AIRLINES', 245, 15000, 'Scheduled'),
+(3, 'CA12345', 'MACTAN AIRPORT', 'MANILA AIRPORT', '2025-05-03 15:00:00', '2025-05-03 18:00:00', 'MATRIX AIRLINES', 244, 15000, 'Done'),
 (4, 'BA12345', 'MANILA AIRPORT', 'MACTAN AIRPORT', '2025-05-03 18:00:00', '2025-05-03 21:00:00', 'MATRIX AIRLINES', 244, 15000, 'Scheduled'),
-(5, 'BBK321', 'Japan', 'Mactan', '2023-11-15 14:30:00', '2023-11-15 20:30:00', 'MATRIX AIRLINES', 200, 30000, 'Scheduled');
+(5, 'BBK321', 'Japan', 'Mactan', '2023-11-15 14:30:00', '2023-11-15 20:30:00', 'MATRIX AIRLINES', 199, 30000, 'Scheduled');
 
 -- --------------------------------------------------------
 
@@ -166,7 +168,45 @@ INSERT INTO `system_logs` (`log_id`, `p_id`, `user_type`, `action`, `timestamp`)
 (53, 35, 'PASSENGER', 'LOGIN', '2025-05-14 20:59:22'),
 (54, 28, 'ADMIN', 'LOGIN', '2025-05-14 21:05:22'),
 (55, 28, 'ADMIN', 'LOGIN', '2025-05-14 21:07:43'),
-(56, 35, 'PASSENGER', 'LOGIN', '2025-05-14 21:09:10');
+(56, 35, 'PASSENGER', 'LOGIN', '2025-05-14 21:09:10'),
+(57, 35, 'PASSENGER', 'LOGIN', '2025-05-14 22:54:39'),
+(58, 35, 'PASSENGER', 'LOGIN', '2025-05-14 22:57:08'),
+(60, 28, 'ADMIN', 'LOGIN', '2025-05-14 22:57:26'),
+(62, 35, 'PASSENGER', 'LOGIN', '2025-05-14 22:59:29'),
+(63, 35, 'PASSENGER', 'LOGIN', '2025-05-14 23:30:29'),
+(64, 28, 'ADMIN', 'LOGIN', '2025-05-28 00:11:46'),
+(65, 28, 'ADMIN', 'LOGIN', '2025-05-28 00:13:28'),
+(66, 28, 'ADMIN', 'LOGIN', '2025-05-28 00:17:22'),
+(67, 35, 'PASSENGER', 'LOGIN', '2025-05-28 00:19:01'),
+(68, 28, 'ADMIN', 'LOGIN', '2025-05-28 00:19:21'),
+(69, 28, 'ADMIN', 'LOGIN', '2025-05-28 00:19:59'),
+(71, 35, 'PASSENGER', 'LOGIN', '2025-05-28 00:20:12'),
+(72, 28, 'ADMIN', 'LOGIN', '2025-05-28 00:22:52'),
+(73, 35, 'PASSENGER', 'LOGIN', '2025-05-28 00:39:19'),
+(74, 35, 'PASSENGER', 'LOGIN', '2025-05-28 00:39:28'),
+(75, 35, 'PASSENGER', 'LOGIN', '2025-05-28 00:40:42'),
+(77, 28, 'ADMIN', 'LOGIN', '2025-05-28 00:40:59'),
+(79, 35, 'PASSENGER', 'LOGIN', '2025-05-28 00:41:07'),
+(80, 35, 'PASSENGER', 'LOGIN', '2025-05-28 00:41:28'),
+(82, 28, 'ADMIN', 'LOGIN', '2025-05-28 00:41:43'),
+(84, 35, 'PASSENGER', 'LOGIN', '2025-05-28 00:41:55'),
+(85, 28, 'ADMIN', 'LOGIN', '2025-05-28 00:42:20'),
+(86, 28, 'ADMIN', 'LOGIN', '2025-05-28 00:44:03'),
+(87, 28, 'ADMIN', 'LOGIN', '2025-05-28 00:45:47'),
+(88, 28, 'ADMIN', 'LOGIN', '2025-05-28 00:46:38'),
+(89, 28, 'ADMIN', 'LOGIN', '2025-05-28 01:02:01'),
+(91, 28, 'ADMIN', 'LOGIN', '2025-05-28 01:02:59'),
+(92, 28, 'ADMIN', 'LOGIN', '2025-05-28 01:04:35'),
+(93, 28, 'ADMIN', 'LOGIN', '2025-05-28 01:06:30'),
+(94, 28, 'ADMIN', 'LOGIN', '2025-05-28 01:07:16'),
+(95, 28, 'ADMIN', 'LOGIN', '2025-05-28 01:09:00'),
+(96, 28, 'ADMIN', 'LOGIN', '2025-05-28 01:10:01'),
+(97, 28, 'ADMIN', 'LOGIN', '2025-05-28 01:10:46'),
+(99, 28, 'ADMIN', 'LOGIN', '2025-05-28 01:13:24'),
+(100, 28, 'ADMIN', 'LOGIN', '2025-05-28 01:13:39'),
+(101, 28, 'ADMIN', 'LOGIN', '2025-05-28 01:14:28'),
+(102, 28, 'ADMIN', 'LOGIN', '2025-05-28 01:14:42'),
+(103, 28, 'ADMIN', 'LOGIN', '2025-05-28 01:15:40');
 
 --
 -- Indexes for dumped tables
@@ -208,7 +248,7 @@ ALTER TABLE `system_logs`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `flights`
@@ -226,7 +266,7 @@ ALTER TABLE `passengers`
 -- AUTO_INCREMENT for table `system_logs`
 --
 ALTER TABLE `system_logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- Constraints for dumped tables
