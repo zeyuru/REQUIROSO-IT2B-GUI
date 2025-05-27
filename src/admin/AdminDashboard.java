@@ -13,7 +13,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         initComponents();
         
           
-      setSize(950, 800);   
+       setSize(950, 850);  
     setLocationRelativeTo(null); 
  
     setResizable(false); 
@@ -49,6 +49,9 @@ public class AdminDashboard extends javax.swing.JFrame {
         logs = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        Bookings = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -78,7 +81,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         });
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 0, -1, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 0, 720, 130));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 0, 670, 130));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -141,7 +144,7 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("LOGS");
+        jLabel5.setText("BOOKINGS");
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel5MouseClicked(evt);
@@ -152,7 +155,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 jLabel5KeyPressed(evt);
             }
         });
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 470, 110, 60));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 510, 200, 60));
 
         logs.setBackground(new java.awt.Color(204, 204, 204));
         logs.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -165,7 +168,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagefolder/log.png"))); // NOI18N
         logs.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, -1, -1));
 
-        jPanel1.add(logs, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 530, 320, 210));
+        jPanel1.add(logs, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, 320, 210));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -182,18 +185,44 @@ public class AdminDashboard extends javax.swing.JFrame {
         });
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 260, 60));
 
+        Bookings.setBackground(new java.awt.Color(204, 204, 204));
+        Bookings.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BookingsMouseClicked(evt);
+            }
+        });
+        Bookings.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagefolder/coffee.png"))); // NOI18N
+        Bookings.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, -1, -1));
+
+        jPanel1.add(Bookings, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 570, 320, 210));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("LOGS");
+        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel9MouseClicked(evt);
+            }
+        });
+        jLabel9.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel9KeyPressed(evt);
+            }
+        });
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 510, 110, 60));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1050, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 836, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 877, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -261,6 +290,19 @@ public class AdminDashboard extends javax.swing.JFrame {
        this.dispose();
     }//GEN-LAST:event_logsMouseClicked
 
+    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel9MouseClicked
+
+    private void jLabel9KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel9KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel9KeyPressed
+
+    private void BookingsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BookingsMouseClicked
+         new PendingBookings().setVisible(true);
+    this.dispose();
+    }//GEN-LAST:event_BookingsMouseClicked
+
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -295,9 +337,11 @@ public class AdminDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Bookings;
     private javax.swing.JLabel acc_name;
     private javax.swing.JPanel flights;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -305,6 +349,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

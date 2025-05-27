@@ -196,7 +196,7 @@ public static String convertToDisplayDateTime(String sqlDateTime) throws ParseEx
         jPanel3.add(Airline, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, 210, 50));
 
         Status.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        Status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Scheduled", "Delayed" }));
+        Status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Scheduled", "Delayed", "Done" }));
         jPanel3.add(Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 460, 210, 50));
 
         clearFields.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N

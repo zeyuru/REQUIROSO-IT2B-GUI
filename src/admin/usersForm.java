@@ -23,7 +23,7 @@ public class usersForm extends javax.swing.JFrame {
         displayData();
         
           Color hovercolor = new Color(200, 200, 200);
-       setSize(950, 600);  
+       setSize(950, 800);  
     setLocationRelativeTo(null); 
  
     setResizable(false); 
@@ -87,6 +87,8 @@ public void displayData(){
         AddUser = new javax.swing.JLabel();
         print = new javax.swing.JPanel();
         p = new javax.swing.JLabel();
+        View = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -124,7 +126,7 @@ public void displayData(){
         ));
         jScrollPane1.setViewportView(usersTable);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 730, 500));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 730, 730));
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
         jPanel3.setForeground(new java.awt.Color(51, 204, 255));
@@ -196,12 +198,12 @@ public void displayData(){
         acc_id.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         acc_id.setForeground(new java.awt.Color(255, 255, 255));
         acc_id.setText("ID");
-        jPanel4.add(acc_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, -1, -1));
+        jPanel4.add(acc_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 670, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Current User: ");
-        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, -1, -1));
+        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 650, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -252,7 +254,22 @@ public void displayData(){
 
         jPanel4.add(print, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 120, 70));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 220, 500));
+        View.setBackground(new java.awt.Color(153, 153, 153));
+        View.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ViewMouseClicked(evt);
+            }
+        });
+        View.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("VIEW");
+        View.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 50));
+
+        jPanel4.add(View, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 120, 70));
+
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 220, 730));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -477,6 +494,24 @@ public void displayData(){
     }
     }//GEN-LAST:event_printMouseClicked
 
+    private void ViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ViewMouseClicked
+         int selectedRow = usersTable.getSelectedRow();
+
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Please select a user first!", "No Selection", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    try {
+        int passengerId = Integer.parseInt(usersTable.getValueAt(selectedRow, 0).toString());
+        FlightHistory history = new FlightHistory(passengerId);
+        history.setVisible(true);
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    this.dispose();
+    }//GEN-LAST:event_ViewMouseClicked
+
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -513,6 +548,7 @@ public void displayData(){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AddUser;
+    private javax.swing.JPanel View;
     private javax.swing.JLabel acc_id;
     private javax.swing.JButton btnSetPending;
     private javax.swing.JLabel edit;
@@ -524,6 +560,7 @@ public void displayData(){
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

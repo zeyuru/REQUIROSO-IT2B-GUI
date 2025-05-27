@@ -93,6 +93,7 @@ public class MyBookings extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        back = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         myBookingsTable = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
@@ -108,6 +109,15 @@ public class MyBookings extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 3, 36)); // NOI18N
         jLabel1.setText("BOOKINGS");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 220, -1));
+
+        back.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        back.setText("BACK");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
+        jPanel2.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 0, 90, -1));
 
         myBookingsTable.setBackground(new java.awt.Color(102, 204, 255));
         myBookingsTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
@@ -129,7 +139,7 @@ public class MyBookings extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jScrollPane1)
         );
@@ -211,6 +221,11 @@ public class MyBookings extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_printActionPerformed
 
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+       new PassengerDashboard().setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_backActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -247,6 +262,7 @@ public class MyBookings extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton back;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

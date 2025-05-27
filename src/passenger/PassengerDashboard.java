@@ -307,7 +307,7 @@ public class PassengerDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutActionPerformed
 
     private void BookFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookFlightActionPerformed
-        int selectedRow = availableFlights.getSelectedRow();
+         int selectedRow = availableFlights.getSelectedRow();
 
     if (selectedRow == -1) {
         JOptionPane.showMessageDialog(this, "Please select a flight to book first", "No Flight Selected", JOptionPane.WARNING_MESSAGE);
@@ -322,7 +322,6 @@ public class PassengerDashboard extends javax.swing.JFrame {
         String arrival = availableFlights.getValueAt(selectedRow, 3).toString();
         int capacity = (int) availableFlights.getValueAt(selectedRow, 7);
         int price = (int) availableFlights.getValueAt(selectedRow, 8);
-        
 
         if (capacity <= 0) {
             JOptionPane.showMessageDialog(this, "This flight is fully booked", "No Capacity", JOptionPane.WARNING_MESSAGE);
@@ -349,6 +348,23 @@ public class PassengerDashboard extends javax.swing.JFrame {
             return;
         }
 
+        // Check if a booking already exists (excluding rejected)
+        String checkBookingQuery = "SELECT COUNT(*) FROM bookings WHERE passenger_id = ? AND flight_id = ? AND status != 'Rejected'";
+        PreparedStatement checkStmt = dbc.connect.prepareStatement(checkBookingQuery);
+        checkStmt.setInt(1, passengerId);
+        checkStmt.setInt(2, flightId);
+        ResultSet checkRs = checkStmt.executeQuery();
+        checkRs.next();
+        int existingBookings = checkRs.getInt(1);
+        checkRs.close();
+        checkStmt.close();
+
+        if (existingBookings > 0) {
+            JOptionPane.showMessageDialog(this, "You have already booked this flight. Cannot rebook unless the previous booking was rejected.", "Duplicate Booking", JOptionPane.WARNING_MESSAGE);
+            dbc.connect.close();
+            return;
+        }
+
         int confirm = JOptionPane.showConfirmDialog(this,
                 "Confirm booking for:\n\n" +
                         "Flight: " + flightNumber + "\n" +
@@ -359,59 +375,61 @@ public class PassengerDashboard extends javax.swing.JFrame {
                 JOptionPane.YES_NO_OPTION);
 
         if (confirm == JOptionPane.YES_OPTION) {
-    // Prompt for payment
-    String paymentInput = JOptionPane.showInputDialog(this,
-            "Enter payment amount (Ticket Price: " + price + "):", "Payment", JOptionPane.PLAIN_MESSAGE);
+            // Prompt for payment
+            String paymentInput = JOptionPane.showInputDialog(this,
+                    "Enter payment amount (Ticket Price: " + price + "):", "Payment", JOptionPane.PLAIN_MESSAGE);
 
-    if (paymentInput == null || paymentInput.trim().isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Payment cancelled.", "Cancelled", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+            if (paymentInput == null || paymentInput.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Payment cancelled.", "Cancelled", JOptionPane.WARNING_MESSAGE);
+                dbc.connect.close();
+                return;
+            }
 
-    try {
-        double payment = Double.parseDouble(paymentInput);
+            try {
+                double payment = Double.parseDouble(paymentInput);
 
-        if (payment < price) {
-            JOptionPane.showMessageDialog(this, "Insufficient payment. You need at least " + price + ".", "Payment Error", JOptionPane.ERROR_MESSAGE);
-            return;
+                if (payment < price) {
+                    JOptionPane.showMessageDialog(this, "Insufficient payment. You need at least " + price + ".", "Payment Error", JOptionPane.ERROR_MESSAGE);
+                    dbc.connect.close();
+                    return;
+                }
+
+                // Optional: Calculate and show change
+                double change = payment - price;
+
+                // Insert booking
+                String insertQuery = "INSERT INTO bookings (passenger_id, flight_id, booking_date, status) " +
+                        "VALUES (?, ?, NOW(), 'Pending')";
+                PreparedStatement pstmt = dbc.connect.prepareStatement(insertQuery);
+                pstmt.setInt(1, passengerId);
+                pstmt.setInt(2, flightId);
+                int result = pstmt.executeUpdate();
+
+                if (result == 1) {
+                    // Update flight capacity
+                    String updateQuery = "UPDATE flights SET capacity = capacity - 1 WHERE flight_id = ? AND capacity > 0";
+                    PreparedStatement pstmt2 = dbc.connect.prepareStatement(updateQuery);
+                    pstmt2.setInt(1, flightId);
+                    pstmt2.executeUpdate();
+
+                    loadFlightsData(); // Refresh table
+
+                    JOptionPane.showMessageDialog(this,
+                            "Booking confirmed!\n\n" +
+                                    "Flight: " + flightNumber + "\n" +
+                                    "Reference: FLT-" + flightId + "-" + passengerId + "\n" +
+                                    "Amount Paid: " + payment + "\n" +
+                                    (change > 0 ? "Change: " + change + "\n" : ""),
+                            "Success",
+                            JOptionPane.INFORMATION_MESSAGE);
+                }
+
+                pstmt.close();
+
+            } catch (NumberFormatException nfe) {
+                JOptionPane.showMessageDialog(this, "Invalid payment input. Please enter a numeric value.", "Input Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
-
-        // Optional: Calculate and show change
-        double change = payment - price;
-
-        // Insert booking
-        String insertQuery = "INSERT INTO bookings (passenger_id, flight_id, booking_date, status) " +
-                             "VALUES (?, ?, NOW(), 'Confirmed')";
-        PreparedStatement pstmt = dbc.connect.prepareStatement(insertQuery);
-        pstmt.setInt(1, passengerId);
-        pstmt.setInt(2, flightId);
-        int result = pstmt.executeUpdate();
-
-        if (result == 1) {
-            // Update flight capacity
-            String updateQuery = "UPDATE flights SET capacity = capacity - 1 WHERE flight_id = ? AND capacity > 0";
-            PreparedStatement pstmt2 = dbc.connect.prepareStatement(updateQuery);
-            pstmt2.setInt(1, flightId);
-            pstmt2.executeUpdate();
-
-            loadFlightsData(); // Refresh table
-
-            JOptionPane.showMessageDialog(this,
-                    "Booking confirmed!\n\n" +
-                            "Flight: " + flightNumber + "\n" +
-                            "Reference: FLT-" + flightId + "-" + passengerId + "\n" +
-                            "Amount Paid: " + payment + "\n" +
-                            (change > 0 ? "Change: " + change + "\n" : ""),
-                    "Success",
-                    JOptionPane.INFORMATION_MESSAGE);
-        }
-
-        pstmt.close();
-
-    } catch (NumberFormatException nfe) {
-        JOptionPane.showMessageDialog(this, "Invalid payment input. Please enter a numeric value.", "Input Error", JOptionPane.ERROR_MESSAGE);
-    }
-}
 
         dbc.connect.close();
     } catch (SQLException ex) {

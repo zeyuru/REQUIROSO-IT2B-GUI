@@ -195,6 +195,14 @@ public class FlightsInformation extends javax.swing.JFrame {
             ResultSet rs = db.getData("SELECT * FROM flights WHERE flight_id = " + flightId);
 
             if (rs.next()) {
+                // ✅ Prevent editing if flight is marked as "Done"
+                String status = rs.getString("status");
+                if ("Done".equalsIgnoreCase(status)) {
+                    JOptionPane.showMessageDialog(this, "This flight is marked as 'Done' and cannot be edited.", "Edit Not Allowed", JOptionPane.WARNING_MESSAGE);
+                    rs.close();
+                    return;
+                }
+
                 // Set basic fields
                 flightsForm.setFlightId(flightId);
                 flightsForm.FlightNumber.setText(rs.getString("flight_number"));
@@ -203,15 +211,14 @@ public class FlightsInformation extends javax.swing.JFrame {
                 flightsForm.Airline.setText(rs.getString("airline"));
                 flightsForm.Price.setText(String.valueOf(rs.getInt("price")));
                 flightsForm.Capacity.setText(String.valueOf(rs.getInt("capacity")));
-                flightsForm.Status.setSelectedItem(rs.getString("status"));
+                flightsForm.Status.setSelectedItem(status);
 
                 // Handle dates properly
                 SimpleDateFormat displayFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
-                
-                // Convert SQL dates to display format
+
                 java.sql.Timestamp departureTimestamp = rs.getTimestamp("departure_time");
                 java.sql.Timestamp arrivalTimestamp = rs.getTimestamp("arrival_time");
-                
+
                 if (departureTimestamp != null) {
                     flightsForm.DepartureTime.setText(displayFormat.format(new Date(departureTimestamp.getTime())));
                 }
@@ -222,8 +229,7 @@ public class FlightsInformation extends javax.swing.JFrame {
                 // Set button states
                 flightsForm.addFlight.setEnabled(false);
                 flightsForm.updateFlight.setEnabled(true);
-               
-                
+
                 flightsForm.setVisible(true);
                 this.dispose();
             }
